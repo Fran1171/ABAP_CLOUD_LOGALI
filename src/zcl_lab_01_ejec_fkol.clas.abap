@@ -4,6 +4,8 @@ CLASS zcl_lab_01_ejec_fkol DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+    INTERFACES if_oo_adt_classrun.
+
   PROTECTED SECTION.
   PRIVATE SECTION.
 ENDCLASS.
@@ -11,4 +13,11 @@ ENDCLASS.
 
 
 CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
+
+  METHOD if_oo_adt_classrun~main.
+
+    out->write( 'Hola mundo' ).
+
+  ENDMETHOD.
+
 ENDCLASS.
