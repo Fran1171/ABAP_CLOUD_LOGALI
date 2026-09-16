@@ -29,6 +29,15 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
 
     out->write( lv_age ).
 
+*   // Ejercicio 5
+    DATA(lo_check_flight_exist) = NEW zcl_lab_05_flight_fkol( ).
+
+    DATA(lv_exists) = lo_check_flight_exist->check_flight_exists(
+                      iv_carrier_id    = 'LH'
+                      iv_connection_id = 0400 ).
+
+    out->write( lv_exists ).
+
   ENDMETHOD.
 
 ENDCLASS.
