@@ -38,6 +38,30 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
 
     out->write( lv_exists ).
 
+
+* //Ejercicio 6
+    DATA(lo_object) = NEW zcl_lab_06_elements_fkol( ).
+
+    lo_object->set_object( iv_class     = 'ZCL_LAB_06_ELEMENTS_FKOL'
+                           iv_instance  = 'LO_OBJECT'
+                           iv_reference = 'MS_OBJECT' ).
+
+    out->write( lo_object->ms_object ).
+
+* // Constantes de Clases
+    out->write( zcl_lab_06_elements_fkol=>c_1 ).
+    out->write( zcl_lab_06_elements_fkol=>c_2 ).
+    out->write( zcl_lab_06_elements_fkol=>c_3 ).
+    out->write( zcl_lab_06_elements_fkol=>c_4 ).
+
+
+
+*  //Ejercicio 7
+    DATA(lo_student) = NEW zcl_lab_07_student_fkol( ).
+
+    lo_student->set_birth_date( iv_birth_date = '19870117' ).
+
+
   ENDMETHOD.
 
 ENDCLASS.
