@@ -5,7 +5,7 @@ CLASS zcl_lab_08_work_record_fkol DEFINITION
 
   PUBLIC SECTION.
 
-    METHODS:
+    CLASS-METHODS:
       open_new_record
         IMPORTING
           iv_date       TYPE zdate
