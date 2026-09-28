@@ -5,7 +5,7 @@ CLASS zcl_lab_08_work_record_fkol DEFINITION
 
   PUBLIC SECTION.
 
-    CLASS-METHODS:
+    CLASS-METHODS:  " El class es para metodo estatico
       open_new_record
         IMPORTING
           iv_date       TYPE zdate

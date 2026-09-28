@@ -104,6 +104,13 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
     out->write( '// Ejercicio 9' ).
     out->write( lo_account->get_iban(  ) ).
 
+* // Ejercicio 10
+   DATA(lo_constructor) = NEW zcl_lab_10_constructor_fkol( ).
+
+    out->write( '// Ejercicio 10' ).
+    out->write( |Orden de ejecución:| && | { zcl_lab_10_constructor_fkol=>log }| ).
+
+
   ENDMETHOD.
 
 ENDCLASS.
