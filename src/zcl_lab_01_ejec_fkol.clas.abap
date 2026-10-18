@@ -105,10 +105,25 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
     out->write( lo_account->get_iban(  ) ).
 
 * // Ejercicio 10
-   DATA(lo_constructor) = NEW zcl_lab_10_constructor_fkol( ).
+    DATA(lo_constructor) = NEW zcl_lab_10_constructor_fkol( ).
 
     out->write( '// Ejercicio 10' ).
     out->write( |Orden de ejecución:| && | { zcl_lab_10_constructor_fkol=>log }| ).
+
+* //Ejercico 11
+    out->write( '// Ejercicio 11' ).
+    DATA(lo_LINUX) = NEW zcl_lab_12_linux( ).
+
+    " Llamada al método heredado de la clase superior
+    lo_linux->get_architecture(
+      IMPORTING
+        ev_architecture = DATA(lv_architecture) ).
+
+    out->write( |Arquitectura: { lv_architecture }| ).
+
+* ¿Se puede llamar al método de la clase superior con la
+* referencia del objeto de la clase hija?
+* Si, se puede. Siempre y cuando no este en la sección privada
 
 
   ENDMETHOD.
