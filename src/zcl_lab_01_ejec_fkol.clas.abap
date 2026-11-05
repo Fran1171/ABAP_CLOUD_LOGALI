@@ -110,8 +110,8 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
     out->write( '// Ejercicio 10' ).
     out->write( |Orden de ejecución:| && | { zcl_lab_10_constructor_fkol=>log }| ).
 
-* //Ejercico 11
-    out->write( '// Ejercicio 11' ).
+* //Ejercico 11 y 12
+    out->write( '// Ejercicio 11 y 12' ).
     DATA(lo_LINUX) = NEW zcl_lab_12_linux( ).
 
     " Llamada al método heredado de la clase superior
@@ -124,6 +124,16 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
 * ¿Se puede llamar al método de la clase superior con la
 * referencia del objeto de la clase hija?
 * Si, se puede. Siempre y cuando no este en la sección privada
+
+
+* //Ejercico 13 y 14
+    out->write( '// Ejercicio 13 y 14' ).
+
+DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
+
+    IF lo_grid IS BOUND.
+      out->write( |Objeto ZCL_LAB_14_GRID_FKOL instanciado OK| ).
+    ENDIF.
 
 
   ENDMETHOD.
