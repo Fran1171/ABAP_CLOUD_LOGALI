@@ -136,6 +136,36 @@ DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
     ENDIF.
 
 
+* //Ejercico 15, 16, 17
+    out->write( '// Ejercicio 15, 16 y 17' ).
+
+    SELECT SINGLE * FROM /dmo/flight
+      INTO @DATA(ls_flight).
+
+    IF sy-subrc <> 0.
+      out->write( 'No se encontraron registros en /DMO/FLIGHT' ).
+      RETURN.
+    ENDIF.
+
+    DATA(lo_flight_price)   = NEW zcl_lab_15_flight_price_fkol( ).
+    DATA(lo_price_discount) = NEW zcl_lab_16_price_discount_fkol( ).
+    DATA(lo_super_discount) = NEW zcl_lab_17_super_discount_fkol( ).
+
+    " 3. Llamar al método ADD_PRICE con el mismo registro
+    lo_flight_price->add_price( ls_flight ).
+    lo_price_discount->add_price( ls_flight ).
+    lo_super_discount->add_price( ls_flight ).
+
+    " 4. Mostrar los precios en la consola
+    out->write( |Vuelo: { ls_flight-carrier_id } { ls_flight-connection_id } - Fecha: { ls_flight-flight_date DATE = USER }| ).
+    out->write( |----------------------------------------------| ).
+
+    out->write( |Precio habitual:          { lo_flight_price->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
+    out->write( |Precio con 10% descuento: { lo_price_discount->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
+    out->write( |Precio con 20% descuento: { lo_super_discount->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
+
+
+
   ENDMETHOD.
 
 ENDCLASS.
