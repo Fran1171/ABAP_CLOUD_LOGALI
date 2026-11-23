@@ -83,14 +83,14 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
 *  //Ejercicio 8
     out->write( '// Ejercicio 8' ).
 
-    zcl_lab_08_work_record=>open_new_record(
+    zcl_lab_08_work_record_fkol=>open_new_record(
       iv_date       = '20000916'
       iv_first_name = 'Juan'
       iv_last_name  = 'Manuel'
       iv_surname    = 'Gomez' ).
 
     "Invocación SIN  IV_SURNAME
-    zcl_lab_08_work_record=>open_new_record(
+    zcl_lab_08_work_record_fkol=>open_new_record(
       iv_date       = '19860215'
       iv_first_name = 'Ana'
       iv_last_name  = 'García' ).
@@ -112,7 +112,7 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
 
 * //Ejercico 11 y 12
     out->write( '// Ejercicio 11 y 12' ).
-    DATA(lo_LINUX) = NEW zcl_lab_12_linux( ).
+    DATA(lo_LINUX) = NEW zcl_lab_12_linux_fkol( ).
 
     " Llamada al método heredado de la clase superior
     lo_linux->get_architecture(
@@ -163,6 +163,53 @@ DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
     out->write( |Precio habitual:          { lo_flight_price->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
     out->write( |Precio con 10% descuento: { lo_price_discount->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
     out->write( |Precio con 20% descuento: { lo_super_discount->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
+
+    out->write( '// Ejercicio 11 al 20' ).
+    "--------------------------------------------------
+    " 4. NARROWING CAST (Up Cast)
+    "--------------------------------------------------
+    DATA lo_animal TYPE REF TO zcl_lab_18_animal_fkol.
+
+    DATA(lo_lion) = NEW zcl_lab_19_lion_fkol( ).
+
+    " Se asigna una instancia de la hija a una referencia de la clase superior
+    lo_animal = lo_lion.
+
+    out->write( |Narrowing Cast: { lo_animal->walk( ) }| ).
+
+    "--------------------------------------------------
+    " 5. WIDENING CAST (Down Cast)
+    "--------------------------------------------------
+    DATA: lo_lion_1  TYPE REF TO zcl_lab_19_lion_fkol,
+          lo_lion_2  TYPE REF TO zcl_lab_19_lion_fkol,
+          lo_animal2 TYPE REF TO zcl_lab_18_animal_fkol.
+
+    " Se instancia el objeto en la primera referencia LION
+    lo_lion_1 = NEW #( ).
+
+    " Se asigna a la referencia ANIMAL (narrowing implícito)
+    lo_animal2 = lo_lion_1.
+
+    TRY.
+        " Widening Cast: de ANIMAL a la segunda referencia LION
+        lo_lion_2 ?= lo_animal2.          " equivalente: lo_lion_2 = CAST #( lo_animal2 ).
+        out->write( |Widening Cast: { lo_lion_2->walk( ) }| ).
+
+      CATCH cx_sy_move_cast_error INTO DATA(lx_cast).
+        out->write( |Error de cast: { lx_cast->get_text( ) }| ).
+    ENDTRY.
+
+    "--------------------------------------------------
+    " Extra: caso que provoca la excepción
+    "--------------------------------------------------
+    TRY.
+        lo_animal2 = NEW zcl_lab_18_animal_fkol( ).   " objeto que es solo ANIMAL
+        lo_lion_2 ?= lo_animal2.                 " falla: un animal no es un león
+        out->write( lo_lion_2->walk( ) ).
+
+      CATCH cx_sy_move_cast_error INTO lx_cast.
+        out->write( |Error de cast capturado: { lx_cast->get_text( ) }| ).
+    ENDTRY.
 
 
 
