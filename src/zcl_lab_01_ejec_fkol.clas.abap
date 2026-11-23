@@ -129,7 +129,7 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
 * //Ejercico 13 y 14
     out->write( '// Ejercicio 13 y 14' ).
 
-DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
+    DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
 
     IF lo_grid IS BOUND.
       out->write( |Objeto ZCL_LAB_14_GRID_FKOL instanciado OK| ).
@@ -164,7 +164,7 @@ DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
     out->write( |Precio con 10% descuento: { lo_price_discount->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
     out->write( |Precio con 20% descuento: { lo_super_discount->mt_flights[ 1 ]-price } { ls_flight-currency_code }| ).
 
-    out->write( '// Ejercicio 11 al 20' ).
+    out->write( '// Ejercicio 11 al 25' ).
     "--------------------------------------------------
     " 4. NARROWING CAST (Up Cast)
     "--------------------------------------------------
@@ -211,6 +211,20 @@ DATA(lo_grid) = NEW zcl_lab_14_grid_fkol( iv_box = 'Box 1' ).
         out->write( |Error de cast capturado: { lx_cast->get_text( ) }| ).
     ENDTRY.
 
+    " en ambas actividades anda el León
+
+
+" Ejercicio 7: método final
+    DATA(lo_person_2) = NEW zcl_lab_20_person_fkol( ).
+    lo_person_2->set_name( 'Juan' ).
+    out->write( |Persona: { lo_person_2->get_name( ) }| ).
+
+    " Ejercicio 8: instancia creada desde la clase hija -> OK
+    DATA(lo_student_2) = NEW zcl_lab_22_student_fkol( ).
+    out->write( lo_student_2->assign_student( ) ).
+
+    " Fuera del árbol jerárquico -> ERROR DE SINTAXIS
+    " DATA(lo_classroom) = NEW zcl_lab_21_classroom_fkol( ).
 
 
   ENDMETHOD.
