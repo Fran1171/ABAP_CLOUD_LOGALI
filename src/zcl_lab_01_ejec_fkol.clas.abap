@@ -211,6 +211,7 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
         out->write( |Error de cast capturado: { lx_cast->get_text( ) }| ).
     ENDTRY.
 
+" Quien anda?
     " en ambas actividades anda el León
 
 
@@ -226,6 +227,9 @@ CLASS zcl_lab_01_ejec_fkol IMPLEMENTATION.
     " Fuera del árbol jerárquico -> ERROR DE SINTAXIS
     " DATA(lo_classroom) = NEW zcl_lab_21_classroom_fkol( ).
 
+" ¿Se puede crear?
+" No. Si quitas el comentario de NEW zcl_lab_21_classroom( )
+" en la clase de ejecución, la clase no se activa.
 
   ENDMETHOD.
 
